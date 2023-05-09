@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ラーメンタイマー</title>
+</head>
+<body>
+  <h2>ラーメンタイマー</h2>
+  <p><input type="button" id="start" value="START" onclick="timerStart()"></p>
+  <span id="showTime" style="font-size:300%;">3</span>
+  <script>
+    let startButton = document.getElementById("start");
+    let showTime = document.getElementById("showTime");
+    function timerStart(){
+      startButton.disabled = true;
+      let waitTime = 3;
+      let waitSecond = 60 * 3 ;
+
+      let countTime = function(){
+        if(waitSecond > 0){
+          waitSecond--;
+          if(waitSecond > 60){
+            if(waitSecond % 60 == 0){ waitTime--; }
+            blink(showTime);
+            showTime.innerHTML = waitTime;
+          }else{
+            showTime.style.color = "black";
+            showTime.innerHTML = waitSecond;
+          }
+        }else{
+          timerStop();
+        }
+      };
+      startCount = setInterval(countTime, 1000);
+    }
+      function timerStop(){
+        startButton.disabled = false;
+        let audio = new Audio("fanfare.wav")
+        audio.play();
+        clearInterval(startCount);
+      }
+
+      function blink(element){
+        if(element.style.color = "black"){
+          element.style.color = "gray";
+        }else{
+          element.style.color = "black";
+        }
+      }
+  </script>
+
+</body>
+</html>
